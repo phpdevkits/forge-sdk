@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace PhpDevKits\ForgeSdk;
+namespace PhpDevKits\ForgeSdk\Http;
 
 use Saloon\Http\Auth\TokenAuthenticator;
 use Saloon\Http\Connector;
-use Saloon\Traits\Plugins\AcceptsJson;
 
+/**
+ * @internal
+ */
 final class ForgeConnector extends Connector
 {
-    use AcceptsJson;
-
     public function __construct(private readonly string $token) {}
 
     public function resolveBaseUrl(): string
     {
-        return 'https://forge.laravel.com/api/v1';
+        return 'https://forge.laravel.com/api';
     }
 
     protected function defaultAuth(): TokenAuthenticator
@@ -30,7 +30,8 @@ final class ForgeConnector extends Connector
     protected function defaultHeaders(): array
     {
         return [
-            'Content-Type' => 'application/json',
+            'Accept' => 'application/vnd.api+json',
+            'Content-Type' => 'application/vnd.api+json',
         ];
     }
 }
