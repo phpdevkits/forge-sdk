@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "pest-package-tests": {
+      "source": "fbarrento/laravel-agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/pest-package-tests/SKILL.md",
+      "computedHash": "1a62a02b36ecbe2833b4b6979fa4022fbce6baca72af9f0dbb93c2313558c5e2"
+    }
+  }
+}

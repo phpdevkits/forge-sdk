@@ -6,6 +6,12 @@
 /phpunit.xml
 /vendor/
 /.idea/
+/.vscode/
 /.claude/
+/.agents/
+/.env
+/.env.*
+!/.env.example
+!/.env.testing.example
 *.swp
 *.swo
