@@ -12,7 +12,7 @@
 
 A modern PHP SDK for the [Laravel Forge API](https://forge.laravel.com/api-documentation), built on top of [Saloon v3](https://docs.saloon.dev/).
 
-> **Requires [PHP 8.2+](https://php.net/releases/)**
+> **Requires [PHP 8.4+](https://php.net/releases/)**
 
 ## Installation
 
