@@ -1,0 +1,23 @@
+{
+    "statusCode": 202,
+    "headers": {
+        "Date": "REDACTED",
+        "Content-Type": "text\/html; charset=utf-8",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Server": "REDACTED",
+        "Cache-Control": "no-cache, private",
+        "access-control-allow-origin": "*",
+        "x-ratelimit-limit": "REDACTED",
+        "x-ratelimit-remaining": "REDACTED",
+        "x-frame-options": "SAMEORIGIN",
+        "cf-cache-status": "REDACTED",
+        "set-cookie": "REDACTED",
+        "Strict-Transport-Security": "max-age=31536000; preload",
+        "X-Content-Type-Options": "nosniff",
+        "CF-RAY": "REDACTED",
+        "alt-svc": "REDACTED"
+    },
+    "data": "",
+    "context": []
+}

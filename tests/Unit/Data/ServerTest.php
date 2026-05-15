@@ -136,17 +136,44 @@ test('::from() throws when a required integer field is missing',
         ]]);
     })->throws(InvalidArgumentException::class, '`attributes.ssh_port` must be an integer');
 
-test('::from() throws when a required boolean field is missing',
+test('::from() throws when the required is_ready boolean is missing',
     function (): void {
         Server::from(['id' => '1', 'attributes' => [
             'name' => 'x', 'slug' => 'x', 'type' => 'app',
             'ssh_port' => 22, 'provider' => 'aws', 'size' => 'x',
-            'region' => 'x', 'connection_status' => 'c', 'timezone' => 'UTC',
-            'is_ready' => false,
+            'region' => 'x', 'timezone' => 'UTC',
             'created_at' => '2026-01-01T00:00:00Z',
             'updated_at' => '2026-01-01T00:00:00Z',
         ]]);
-    })->throws(InvalidArgumentException::class, '`attributes.revoked` must be a boolean');
+    })->throws(InvalidArgumentException::class, '`attributes.is_ready` must be a boolean');
+
+test('::from() accepts null for revoked and connection_status (fresh-server case)',
+    function (): void {
+        $server = Server::from(['id' => '1', 'attributes' => [
+            'name' => 'x', 'slug' => 'x', 'type' => 'app',
+            'ssh_port' => 22, 'provider' => 'aws', 'size' => 'x',
+            'region' => 'x', 'timezone' => 'UTC',
+            'revoked' => null, 'is_ready' => false,
+            'connection_status' => null,
+            'created_at' => '2026-01-01T00:00:00Z',
+            'updated_at' => '2026-01-01T00:00:00Z',
+        ]]);
+
+        expect($server->revoked)->toBeNull()
+            ->and($server->connectionStatus)->toBeNull();
+    });
+
+test('::from() throws when revoked is the wrong type',
+    function (): void {
+        Server::from(['id' => '1', 'attributes' => [
+            'name' => 'x', 'slug' => 'x', 'type' => 'app',
+            'ssh_port' => 22, 'provider' => 'aws', 'size' => 'x',
+            'region' => 'x', 'timezone' => 'UTC',
+            'revoked' => 'no', 'is_ready' => false,
+            'created_at' => '2026-01-01T00:00:00Z',
+            'updated_at' => '2026-01-01T00:00:00Z',
+        ]]);
+    })->throws(InvalidArgumentException::class, '`attributes.revoked` must be a boolean or null');
 
 test('::from() throws when a required date field is missing',
     function (): void {
