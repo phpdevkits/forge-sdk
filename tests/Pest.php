@@ -25,7 +25,7 @@ foreach (['.env', '.env.testing'] as $envFile) {
  * In recording mode, missing fixtures are recorded by sending the real
  * request through to the Forge API. FORGE_TEST_TOKEN must be set.
  */
-MockConfig::setFixturePath('tests/Fixtures');
+MockConfig::setFixturePath('tests/Fixtures/Saloon');
 
 if (($_ENV['FORGE_RECORD_FIXTURES'] ?? null) !== '1') {
     MockConfig::throwOnMissingFixtures();
