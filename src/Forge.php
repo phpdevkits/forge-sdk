@@ -13,6 +13,7 @@ use PhpDevKits\ForgeSdk\Exceptions\BadRequestException;
 use PhpDevKits\ForgeSdk\Exceptions\ConnectionException;
 use PhpDevKits\ForgeSdk\Exceptions\ForbiddenException;
 use PhpDevKits\ForgeSdk\Exceptions\NotFoundException;
+use PhpDevKits\ForgeSdk\Exceptions\OrganizationNotSetException;
 use PhpDevKits\ForgeSdk\Exceptions\RateLimitException;
 use PhpDevKits\ForgeSdk\Exceptions\ServerException;
 use PhpDevKits\ForgeSdk\Exceptions\UnauthorizedException;
@@ -22,6 +23,8 @@ use PhpDevKits\ForgeSdk\Resources\OrganizationResource;
 use PhpDevKits\ForgeSdk\Resources\OrganizationsResource;
 use PhpDevKits\ForgeSdk\Resources\ProviderResource;
 use PhpDevKits\ForgeSdk\Resources\ProvidersResource;
+use PhpDevKits\ForgeSdk\Resources\ServerResource;
+use PhpDevKits\ForgeSdk\Resources\ServersResource;
 use RuntimeException;
 use Saloon\Exceptions\Request\FatalRequestException;
 use Saloon\Http\Auth\TokenAuthenticator;
@@ -166,6 +169,47 @@ final class Forge extends Connector
     public function provider(int|string $id): ProviderResource
     {
         return new ProviderResource($this, $id);
+    }
+
+    /**
+     * Return a clone of this connector bound to the given organization slug,
+     * overriding any default org from the constructor / env / config.
+     *
+     * The original connector is left untouched — chains stay immutable so
+     * concurrent callers can scope themselves without stepping on each other.
+     * Connector-level state (notably the `MockClient` used by tests) is
+     * carried over so chained calls don't escape the mock and hit the real
+     * API.
+     */
+    public function org(string $slug): self
+    {
+        $clone = new self($this->token, $slug);
+
+        $mockClient = $this->getMockClient();
+        if ($mockClient instanceof MockClient) {
+            $clone->withMockClient($mockClient);
+        }
+
+        return $clone;
+    }
+
+    public function servers(): ServersResource
+    {
+        return new ServersResource($this, $this->requireOrganization('servers'));
+    }
+
+    public function server(int|string $id): ServerResource
+    {
+        return new ServerResource($this, $this->requireOrganization('server'), $id);
+    }
+
+    private function requireOrganization(string $accessor): string
+    {
+        if ($this->defaultOrganization === null) {
+            throw OrganizationNotSetException::forAccessor($accessor);
+        }
+
+        return $this->defaultOrganization;
     }
 
     #[Override]

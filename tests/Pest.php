@@ -7,8 +7,7 @@ use Saloon\MockConfig;
 
 /*
  * Load .env / .env.testing (in that order, testing wins) so FORGE_TEST_TOKEN
- * and FORGE_RECORD_FIXTURES are available when re-recording Saloon fixtures
- * locally.
+ * and friends are available when Saloon needs to record a missing fixture.
  */
 foreach (['.env', '.env.testing'] as $envFile) {
     if (file_exists(dirname(__DIR__).'/'.$envFile)) {
@@ -17,16 +16,10 @@ foreach (['.env', '.env.testing'] as $envFile) {
 }
 
 /*
- * Tell Saloon where fixtures live and, by default, fail loudly when one is
- * missing. To re-record (or capture a fixture for the first time):
- *
- *   FORGE_RECORD_FIXTURES=1 vendor/bin/pest
- *
- * In recording mode, missing fixtures are recorded by sending the real
- * request through to the Forge API. FORGE_TEST_TOKEN must be set.
+ * Tell Saloon where fixtures live. Saloon's default behavior — record any
+ * missing fixture from the live API — is left in place, matching the
+ * ortto-sdk pattern. Run the suite once with real FORGE_TEST_* credentials
+ * in .env to capture new fixtures; commit them so subsequent runs (and CI)
+ * replay from disk.
  */
 MockConfig::setFixturePath('tests/Fixtures/Saloon');
-
-if (($_ENV['FORGE_RECORD_FIXTURES'] ?? null) !== '1') {
-    MockConfig::throwOnMissingFixtures();
-}
