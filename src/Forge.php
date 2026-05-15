@@ -20,6 +20,8 @@ use PhpDevKits\ForgeSdk\Exceptions\ValidationException;
 use PhpDevKits\ForgeSdk\Requests\Me\GetMe;
 use PhpDevKits\ForgeSdk\Resources\OrganizationResource;
 use PhpDevKits\ForgeSdk\Resources\OrganizationsResource;
+use PhpDevKits\ForgeSdk\Resources\ProviderResource;
+use PhpDevKits\ForgeSdk\Resources\ProvidersResource;
 use RuntimeException;
 use Saloon\Exceptions\Request\FatalRequestException;
 use Saloon\Http\Auth\TokenAuthenticator;
@@ -154,6 +156,16 @@ final class Forge extends Connector
     public function organization(string $slug): OrganizationResource
     {
         return new OrganizationResource($this, $slug);
+    }
+
+    public function providers(): ProvidersResource
+    {
+        return new ProvidersResource($this);
+    }
+
+    public function provider(int|string $id): ProviderResource
+    {
+        return new ProviderResource($this, $id);
     }
 
     #[Override]

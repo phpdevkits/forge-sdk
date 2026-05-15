@@ -1,0 +1,27 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Date": "REDACTED",
+        "Content-Type": "application\/vnd.api+json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Server": "REDACTED",
+        "Cache-Control": "no-cache, private",
+        "access-control-allow-origin": "*",
+        "x-ratelimit-limit": "REDACTED",
+        "x-ratelimit-remaining": "REDACTED",
+        "x-frame-options": [
+            "SAMEORIGIN",
+            "SAMEORIGIN"
+        ],
+        "x-xss-protection": "1; mode=block",
+        "x-content-type-options": "nosniff",
+        "cf-cache-status": "REDACTED",
+        "set-cookie": "REDACTED",
+        "Strict-Transport-Security": "max-age=31536000; preload",
+        "CF-RAY": "REDACTED",
+        "alt-svc": "REDACTED"
+    },
+    "data": "{\"data\":{\"id\":\"1\",\"type\":\"providers\",\"attributes\":{\"name\":\"Test User\",\"slug\":\"test-org-1\",\"simple_name\":\"DigitalOcean\",\"currency\":\"USD\",\"currency_symbol\":\"$\",\"default_size_code\":\"s-1vcpu-1gb\",\"default_region_code\":\"nyc1\"},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/providers\\\/1\"}}}}",
+    "context": []
+}

@@ -9,6 +9,7 @@ use PhpDevKits\ForgeSdk\Requests\Organizations\GetOrganization;
 use RuntimeException;
 use Saloon\Http\BaseResource;
 use Saloon\Http\Connector;
+use Throwable;
 
 final class OrganizationResource extends BaseResource
 {
@@ -20,7 +21,7 @@ final class OrganizationResource extends BaseResource
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function get(): Organization
     {

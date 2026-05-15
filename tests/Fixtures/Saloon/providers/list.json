@@ -1,0 +1,27 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Date": "REDACTED",
+        "Content-Type": "application\/vnd.api+json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Server": "REDACTED",
+        "Cache-Control": "no-cache, private",
+        "access-control-allow-origin": "*",
+        "x-ratelimit-limit": "REDACTED",
+        "x-ratelimit-remaining": "REDACTED",
+        "x-frame-options": [
+            "SAMEORIGIN",
+            "SAMEORIGIN"
+        ],
+        "x-xss-protection": "1; mode=block",
+        "x-content-type-options": "nosniff",
+        "cf-cache-status": "REDACTED",
+        "set-cookie": "REDACTED",
+        "Strict-Transport-Security": "max-age=31536000; preload",
+        "CF-RAY": "REDACTED",
+        "alt-svc": "REDACTED"
+    },
+    "data": "{\"data\":[{\"id\":\"1\",\"type\":\"providers\",\"attributes\":{\"name\":\"Test User\",\"slug\":\"test-org-1\",\"simple_name\":\"DigitalOcean\",\"currency\":\"USD\",\"currency_symbol\":\"$\",\"default_size_code\":\"s-1vcpu-1gb\",\"default_region_code\":\"nyc1\"},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/providers\\\/1\"}}},{\"id\":\"1\",\"type\":\"providers\",\"attributes\":{\"name\":\"Test User\",\"slug\":\"test-org-2\",\"simple_name\":\"Akamai\",\"currency\":\"USD\",\"currency_symbol\":\"$\",\"default_size_code\":\"g6-standard-1\",\"default_region_code\":\"us-east\"},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/providers\\\/4\"}}},{\"id\":\"1\",\"type\":\"providers\",\"attributes\":{\"name\":\"Test User\",\"slug\":\"test-org-3\",\"simple_name\":\"AWS\",\"currency\":\"USD\",\"currency_symbol\":\"$\",\"default_size_code\":\"t3.small\",\"default_region_code\":\"us-east-1\"},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/providers\\\/5\"}}},{\"id\":\"1\",\"type\":\"providers\",\"attributes\":{\"name\":\"Test User\",\"slug\":\"test-org-4\",\"simple_name\":\"Hetzner\",\"currency\":\"EUR\",\"currency_symbol\":\"\\u20ac\",\"default_size_code\":\"cpx22\",\"default_region_code\":\"1\"},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/providers\\\/6\"}}},{\"id\":\"1\",\"type\":\"providers\",\"attributes\":{\"name\":\"Test User\",\"slug\":\"test-org-5\",\"simple_name\":\"Custom VPS\",\"currency\":\"USD\",\"currency_symbol\":\"$\",\"default_size_code\":null,\"default_region_code\":null},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/providers\\\/7\"}}},{\"id\":\"1\",\"type\":\"providers\",\"attributes\":{\"name\":\"Test User\",\"slug\":\"test-org-6\",\"simple_name\":\"Vultr\",\"currency\":\"USD\",\"currency_symbol\":\"$\",\"default_size_code\":\"vc2-1c-2gb\",\"default_region_code\":\"ewr\"},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/providers\\\/9\"}}},{\"id\":\"1\",\"type\":\"providers\",\"attributes\":{\"name\":\"Test User\",\"slug\":\"test-org-7\",\"simple_name\":\"Laravel VPS\",\"currency\":\"USD\",\"currency_symbol\":\"$\",\"default_size_code\":\"2GB\",\"default_region_code\":\"nyc1\"},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/providers\\\/12\"}}}],\"links\":[],\"meta\":{\"path\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/providers\",\"per_page\":30,\"next_cursor\":null,\"prev_cursor\":null}}",
+    "context": []
+}
