@@ -49,13 +49,19 @@
             "pint --parallel",
             "rector"
         ],
-        "test:type-coverage": "pest --type-coverage --min=100",
+        "test:type-coverage": [
+            "@putenv XDEBUG_MODE=coverage",
+            "pest --type-coverage --min=100"
+        ],
         "test:lint": [
             "pint --parallel --test",
             "rector --dry-run"
         ],
         "test:refactor": "rector --dry-run",
-        "test:unit": "pest --parallel --coverage --exactly=100",
+        "test:unit": [
+            "@putenv XDEBUG_MODE=coverage",
+            "pest --parallel --coverage --exactly=100"
+        ],
         "test:types": "phpstan",
         "test": [
             "@test:lint",

@@ -38,16 +38,35 @@ final class ForgeConnector extends Connector
     {
         $status = $response->status();
 
-        return match (true) {
-            $status === 400 => new BadRequestException($response),
-            $status === 401 => new UnauthorizedException($response),
-            $status === 403 => new ForbiddenException($response),
-            $status === 404 => new NotFoundException($response),
-            $status === 422 => new ValidationException($response),
-            $status === 429 => new RateLimitException($response),
-            $status >= 500 && $status < 600 => new ServerException($response),
-            default => new ApiException($response),
-        };
+        if ($status === 400) {
+            return new BadRequestException($response);
+        }
+
+        if ($status === 401) {
+            return new UnauthorizedException($response);
+        }
+
+        if ($status === 403) {
+            return new ForbiddenException($response);
+        }
+
+        if ($status === 404) {
+            return new NotFoundException($response);
+        }
+
+        if ($status === 422) {
+            return new ValidationException($response);
+        }
+
+        if ($status === 429) {
+            return new RateLimitException($response);
+        }
+
+        if ($status >= 500 && $status < 600) {
+            return new ServerException($response);
+        }
+
+        return new ApiException($response);
     }
 
     protected function defaultAuth(): TokenAuthenticator
