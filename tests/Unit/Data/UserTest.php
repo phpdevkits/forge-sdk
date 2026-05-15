@@ -42,19 +42,56 @@ test('hydrates from a JSON:API data envelope',
             ->and($user->email)->toBe('ada@example.com');
     });
 
-test('rejects malformed User data',
+test('User::from() throws when id is missing',
     /**
-     * @param  array<array-key, mixed>  $data
-     *
      * @throws InvalidArgumentException
      */
-    function (array $data): void {
-        expect(fn (): User => User::from($data))->toThrow(InvalidArgumentException::class);
-    })->with([
-        'missing id' => [['attributes' => ['name' => 'X', 'email' => 'x@example.com']]],
-        'non-string id' => [['id' => 42, 'attributes' => ['name' => 'X', 'email' => 'x@example.com']]],
-        'missing attributes' => [['id' => '1']],
-        'non-array attributes' => [['id' => '1', 'attributes' => 'nope']],
-        'missing name' => [['id' => '1', 'attributes' => ['email' => 'x@example.com']]],
-        'missing email' => [['id' => '1', 'attributes' => ['name' => 'X']]],
-    ]);
+    function (): void {
+        expect(fn (): User => User::from(['attributes' => ['name' => 'X', 'email' => 'x@example.com']]))
+            ->toThrow(InvalidArgumentException::class, 'User: `id` must be a string.');
+    });
+
+test('User::from() throws when id is not a string',
+    /**
+     * @throws InvalidArgumentException
+     */
+    function (): void {
+        expect(fn (): User => User::from(['id' => 42, 'attributes' => ['name' => 'X', 'email' => 'x@example.com']]))
+            ->toThrow(InvalidArgumentException::class, 'User: `id` must be a string.');
+    });
+
+test('User::from() throws when attributes is missing',
+    /**
+     * @throws InvalidArgumentException
+     */
+    function (): void {
+        expect(fn (): User => User::from(['id' => '1']))
+            ->toThrow(InvalidArgumentException::class, 'User: `attributes` must be an object.');
+    });
+
+test('User::from() throws when attributes is not an array',
+    /**
+     * @throws InvalidArgumentException
+     */
+    function (): void {
+        expect(fn (): User => User::from(['id' => '1', 'attributes' => 'nope']))
+            ->toThrow(InvalidArgumentException::class, 'User: `attributes` must be an object.');
+    });
+
+test('User::from() throws when name is missing',
+    /**
+     * @throws InvalidArgumentException
+     */
+    function (): void {
+        expect(fn (): User => User::from(['id' => '1', 'attributes' => ['email' => 'x@example.com']]))
+            ->toThrow(InvalidArgumentException::class, 'User: `attributes.name` must be a string.');
+    });
+
+test('User::from() throws when email is missing',
+    /**
+     * @throws InvalidArgumentException
+     */
+    function (): void {
+        expect(fn (): User => User::from(['id' => '1', 'attributes' => ['name' => 'X']]))
+            ->toThrow(InvalidArgumentException::class, 'User: `attributes.email` must be a string.');
+    });
