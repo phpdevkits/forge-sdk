@@ -1,0 +1,8 @@
+{
+    "statusCode": 422,
+    "headers": {
+        "Content-Type": "application/json"
+    },
+    "data": "{\"message\":\"The given data was invalid.\",\"errors\":{\"name\":[\"The name field is required.\",\"The name must be at least 3 characters.\"],\"email\":[\"The email field is required.\"]}}",
+    "context": []
+}

@@ -17,6 +17,7 @@
         "fakerphp/faker": "^1.24",
         "fbarrento/data-factory": "^1.1",
         "laravel/pint": "^1.29.1",
+        "nunomaduro/pao": "^1.0",
         "pestphp/pest": "^5.0.0",
         "pestphp/pest-plugin-type-coverage": "^5.0.0",
         "phpstan/phpstan": "^2.1.54",
@@ -48,13 +49,19 @@
             "pint --parallel",
             "rector"
         ],
-        "test:type-coverage": "pest --type-coverage --min=100",
+        "test:type-coverage": [
+            "@putenv XDEBUG_MODE=coverage",
+            "pest --type-coverage --min=100"
+        ],
         "test:lint": [
             "pint --parallel --test",
             "rector --dry-run"
         ],
         "test:refactor": "rector --dry-run",
-        "test:unit": "pest --parallel --coverage --exactly=100",
+        "test:unit": [
+            "@putenv XDEBUG_MODE=coverage",
+            "pest --parallel --coverage --exactly=100"
+        ],
         "test:types": "phpstan",
         "test": [
             "@test:lint",

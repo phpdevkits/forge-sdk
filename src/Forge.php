@@ -7,10 +7,14 @@ namespace PhpDevKits\ForgeSdk;
 use InvalidArgumentException;
 use JsonException;
 use PhpDevKits\ForgeSdk\Data\User;
+use PhpDevKits\ForgeSdk\Exceptions\ConnectionException;
 use PhpDevKits\ForgeSdk\Http\ForgeConnector;
 use PhpDevKits\ForgeSdk\Requests\Me\GetMeRequest;
 use RuntimeException;
+use Saloon\Exceptions\Request\FatalRequestException;
 use Saloon\Http\Faking\MockClient;
+use Saloon\Http\Request;
+use Saloon\Http\Response;
 
 final readonly class Forge
 {
@@ -86,7 +90,7 @@ final readonly class Forge
 
     public function me(): User
     {
-        $response = $this->connector->send(new GetMeRequest);
+        $response = $this->send(new GetMeRequest);
 
         $data = $response->json('data');
 
@@ -95,5 +99,17 @@ final readonly class Forge
         }
 
         return User::from($data);
+    }
+
+    private function send(Request $request): Response
+    {
+        try {
+            return $this->connector->send($request);
+        } catch (FatalRequestException $fatalRequestException) {
+            throw new ConnectionException(
+                'Forge API connection failed: '.$fatalRequestException->getMessage(),
+                $fatalRequestException,
+            );
+        }
     }
 }
