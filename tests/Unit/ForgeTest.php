@@ -8,6 +8,8 @@ use InvalidArgumentException;
 use PhpDevKits\ForgeSdk\Forge;
 use PhpDevKits\ForgeSdk\Resources\OrganizationResource;
 use PhpDevKits\ForgeSdk\Resources\OrganizationsResource;
+use PhpDevKits\ForgeSdk\Resources\ProviderResource;
+use PhpDevKits\ForgeSdk\Resources\ProvidersResource;
 
 afterEach(function (): void {
     unset(
@@ -172,4 +174,18 @@ test('organization($slug) returns an OrganizationResource',
         $forge = new Forge('test-token');
 
         expect($forge->organization('acme'))->toBeInstanceOf(OrganizationResource::class);
+    });
+
+test('providers() returns a ProvidersResource',
+    function (): void {
+        $forge = new Forge('test-token');
+
+        expect($forge->providers())->toBeInstanceOf(ProvidersResource::class);
+    });
+
+test('provider($slug) returns a ProviderResource',
+    function (): void {
+        $forge = new Forge('test-token');
+
+        expect($forge->provider('digitalocean'))->toBeInstanceOf(ProviderResource::class);
     });
