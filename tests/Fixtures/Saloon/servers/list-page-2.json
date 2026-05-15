@@ -1,0 +1,27 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Date": "REDACTED",
+        "Content-Type": "application\/vnd.api+json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Server": "REDACTED",
+        "Cache-Control": "no-cache, private",
+        "access-control-allow-origin": "*",
+        "x-ratelimit-limit": "REDACTED",
+        "x-ratelimit-remaining": "REDACTED",
+        "x-frame-options": [
+            "SAMEORIGIN",
+            "SAMEORIGIN"
+        ],
+        "x-xss-protection": "1; mode=block",
+        "x-content-type-options": "nosniff",
+        "cf-cache-status": "REDACTED",
+        "set-cookie": "REDACTED",
+        "Strict-Transport-Security": "max-age=31536000; preload",
+        "CF-RAY": "REDACTED",
+        "alt-svc": "REDACTED"
+    },
+    "data": "{\"data\":[{\"id\":\"1\",\"type\":\"servers\",\"attributes\":{\"id\":\"1\",\"credential_id\":1,\"name\":\"Test User\",\"slug\":\"test-org-1\",\"type\":\"cache\",\"ubuntu_version\":\"24.04\",\"ssh_port\":22,\"provider\":\"hetzner\",\"identifier\":\"test-server-identifier\",\"size\":\"3151\",\"region\":\"Nuremberg\",\"php_version\":\"php84\",\"php_cli_version\":\"php84\",\"opcache_status\":null,\"database_type\":\"\",\"db_status\":null,\"redis_status\":null,\"ip_address\":\"203.0.113.1\",\"private_ip_address\":\"10.0.0.1\",\"revoked\":false,\"created_at\":\"2024-01-01T00:00:00.000000Z\",\"updated_at\":\"2024-01-01T00:00:00.000000Z\",\"connection_status\":\"successful\",\"timezone\":\"UTC\",\"local_public_key\":\"REDACTED\",\"is_ready\":true},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/orgs\\\/test-org-1\/servers\/1\"}}}],\"links\":{\"prev\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/orgs\\\/test-org-1\\\/servers?page%5Bsize%5D=1&sort=-created_at&page%5Bcursor%5D=eyJjcmVhdGVkX2F0IjoiMjAyNi0wNC0yNSAxNzo1ODo1OSIsIl9wb2ludHNUb05leHRJdGVtcyI6ZmFsc2V9\",\"next\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/orgs\\\/test-org-1\\\/servers?page%5Bsize%5D=1&sort=-created_at&page%5Bcursor%5D=eyJjcmVhdGVkX2F0IjoiMjAyNi0wNC0yNSAxNzo1ODo1OSIsIl9wb2ludHNUb05leHRJdGVtcyI6dHJ1ZX0\"},\"meta\":{\"path\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/orgs\\\/test-org-1\\\/servers\",\"per_page\":1,\"next_cursor\":\"CURSOR-A\",\"prev_cursor\":\"CURSOR-A\"}}",
+    "context": []
+}

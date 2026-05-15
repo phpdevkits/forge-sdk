@@ -19,7 +19,7 @@ use Saloon\Http\Faking\Fixture;
  * that walks the body in the same order as the JSON-key pass — so the
  * placeholder for a given real slug is consistent across both contexts.
  */
-final class ForgeFixture extends Fixture
+class ForgeFixture extends Fixture
 {
     /**
      * Headers we strip from every recording — CDN noise plus anything that
