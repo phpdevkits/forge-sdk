@@ -6,24 +6,36 @@ namespace PhpDevKits\ForgeSdk;
 
 use InvalidArgumentException;
 use JsonException;
+use Override;
 use PhpDevKits\ForgeSdk\Data\User;
+use PhpDevKits\ForgeSdk\Exceptions\ApiException;
+use PhpDevKits\ForgeSdk\Exceptions\BadRequestException;
 use PhpDevKits\ForgeSdk\Exceptions\ConnectionException;
-use PhpDevKits\ForgeSdk\Http\ForgeConnector;
-use PhpDevKits\ForgeSdk\Requests\Me\GetMeRequest;
+use PhpDevKits\ForgeSdk\Exceptions\ForbiddenException;
+use PhpDevKits\ForgeSdk\Exceptions\NotFoundException;
+use PhpDevKits\ForgeSdk\Exceptions\RateLimitException;
+use PhpDevKits\ForgeSdk\Exceptions\ServerException;
+use PhpDevKits\ForgeSdk\Exceptions\UnauthorizedException;
+use PhpDevKits\ForgeSdk\Exceptions\ValidationException;
+use PhpDevKits\ForgeSdk\Requests\Me\GetMe;
 use RuntimeException;
 use Saloon\Exceptions\Request\FatalRequestException;
+use Saloon\Http\Auth\TokenAuthenticator;
+use Saloon\Http\Connector;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
+use Saloon\Traits\Plugins\AlwaysThrowOnErrors;
+use Throwable;
 
-final readonly class Forge
+final class Forge extends Connector
 {
-    private ForgeConnector $connector;
+    use AlwaysThrowOnErrors;
 
-    public function __construct(string $token, public ?string $organization = null)
-    {
-        $this->connector = new ForgeConnector($token);
-    }
+    public function __construct(
+        private readonly string $token,
+        public readonly ?string $organization = null,
+    ) {}
 
     public static function fromConfig(?string $path = null): self
     {
@@ -81,16 +93,50 @@ final readonly class Forge
         return new self($token, $organization);
     }
 
-    public function withMockClient(MockClient $mockClient): self
+    public function resolveBaseUrl(): string
     {
-        $this->connector->withMockClient($mockClient);
+        return 'https://forge.laravel.com/api';
+    }
 
-        return $this;
+    #[Override]
+    public function getRequestException(Response $response, ?Throwable $senderException): Throwable
+    {
+        $status = $response->status();
+
+        if ($status === 400) {
+            return new BadRequestException($response);
+        }
+
+        if ($status === 401) {
+            return new UnauthorizedException($response);
+        }
+
+        if ($status === 403) {
+            return new ForbiddenException($response);
+        }
+
+        if ($status === 404) {
+            return new NotFoundException($response);
+        }
+
+        if ($status === 422) {
+            return new ValidationException($response);
+        }
+
+        if ($status === 429) {
+            return new RateLimitException($response);
+        }
+
+        if ($status >= 500 && $status < 600) {
+            return new ServerException($response);
+        }
+
+        return new ApiException($response);
     }
 
     public function me(): User
     {
-        $response = $this->send(new GetMeRequest);
+        $response = $this->send(new GetMe);
 
         $data = $response->json('data');
 
@@ -101,15 +147,37 @@ final readonly class Forge
         return User::from($data);
     }
 
-    private function send(Request $request): Response
-    {
+    #[Override]
+    public function send(
+        Request $request,
+        ?MockClient $mockClient = null,
+        ?callable $handleRetry = null,
+    ): Response {
         try {
-            return $this->connector->send($request);
+            return parent::send($request, $mockClient, $handleRetry);
         } catch (FatalRequestException $fatalRequestException) {
             throw new ConnectionException(
                 'Forge API connection failed: '.$fatalRequestException->getMessage(),
                 $fatalRequestException,
             );
         }
+    }
+
+    #[Override]
+    protected function defaultAuth(): TokenAuthenticator
+    {
+        return new TokenAuthenticator($this->token);
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    #[Override]
+    protected function defaultHeaders(): array
+    {
+        return [
+            'Accept' => 'application/vnd.api+json',
+            'Content-Type' => 'application/vnd.api+json',
+        ];
     }
 }
