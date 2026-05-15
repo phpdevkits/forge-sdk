@@ -1,0 +1,8 @@
+{
+    "statusCode": 418,
+    "headers": {
+        "Content-Type": "application/json"
+    },
+    "data": "{\"message\":\"I'm a teapot.\"}",
+    "context": []
+}

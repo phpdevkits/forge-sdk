@@ -1,0 +1,8 @@
+{
+    "statusCode": 403,
+    "headers": {
+        "Content-Type": "application/json"
+    },
+    "data": "{\"message\":\"This action is unauthorized.\"}",
+    "context": []
+}

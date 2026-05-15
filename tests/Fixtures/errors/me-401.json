@@ -1,0 +1,8 @@
+{
+    "statusCode": 401,
+    "headers": {
+        "Content-Type": "application/json"
+    },
+    "data": "{\"message\":\"Unauthenticated.\"}",
+    "context": []
+}

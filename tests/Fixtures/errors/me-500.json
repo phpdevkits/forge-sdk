@@ -1,0 +1,8 @@
+{
+    "statusCode": 500,
+    "headers": {
+        "Content-Type": "application/json"
+    },
+    "data": "{\"message\":\"Server Error.\"}",
+    "context": []
+}
