@@ -22,45 +22,67 @@ composer require phpdevkits/forge-sdk
 
 ## Usage
 
-Grab a personal access token from your [Forge API settings](https://forge.laravel.com/user-profile/api), then point the connector at it:
+Grab a personal access token from your [Forge API settings](https://forge.laravel.com/user-profile/api), then build a `Forge` instance one of three ways:
 
 ```php
-use PhpDevKits\ForgeSdk\ForgeConnector;
-use PhpDevKits\ForgeSdk\Requests\Servers\GetServersRequest;
+use PhpDevKits\ForgeSdk\Forge;
 
-$forge = new ForgeConnector(token: 'your-forge-api-token');
+// 1. Explicit
+$forge = new Forge(token: 'your-forge-api-token', organization: 'acme');
 
-$response = $forge->send(new GetServersRequest);
+// 2. From environment variables (FORGE_TOKEN, optional FORGE_ORGANIZATION)
+$forge = Forge::fromEnvironment();
 
-$servers = $response->json('servers');
+// 3. From a JSON config file
+$forge = Forge::fromConfig('/path/to/forge.json');
+// or with no argument: reads ./forge.json (or $FORGE_CONFIG_PATH if set)
+$forge = Forge::fromConfig();
 ```
 
-### Fetch a single server
+The `forge.json` shape is:
+
+```json
+{
+    "token": "your-forge-api-token",
+    "organization": "acme"
+}
+```
+
+### Get the authenticated user
 
 ```php
-use PhpDevKits\ForgeSdk\Requests\Servers\GetServerRequest;
+$user = $forge->me();
 
-$response = $forge->send(new GetServerRequest(serverId: 42));
-
-$server = $response->json('server');
+echo $user->name;   // "Ada Lovelace"
+echo $user->email;  // "ada@example.com"
+echo $user->id;     // "216174"
 ```
 
-### Testing
+### Testing your own code
 
 The SDK is built on Saloon, so you can fake the Forge API in your own test suite without hitting the network:
 
 ```php
-use PhpDevKits\ForgeSdk\ForgeConnector;
-use PhpDevKits\ForgeSdk\Requests\Servers\GetServersRequest;
+use PhpDevKits\ForgeSdk\Forge;
+use PhpDevKits\ForgeSdk\Requests\Me\GetMeRequest;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 
 $mock = new MockClient([
-    GetServersRequest::class => MockResponse::make(['servers' => []]),
+    GetMeRequest::class => MockResponse::make([
+        'data' => [
+            'id' => '1',
+            'type' => 'users',
+            'attributes' => ['name' => 'Test User', 'email' => 'test@example.com'],
+            'links' => ['self' => ['href' => 'https://forge.laravel.com/api/user']],
+        ],
+    ]),
 ]);
 
-$forge = (new ForgeConnector('test-token'))->withMockClient($mock);
+$forge = new Forge('test-token')->withMockClient($mock);
 ```
+
+> **Tracks Forge API v0.x — minor versions of this SDK may break until 1.0.**
 
 ## Development
 
