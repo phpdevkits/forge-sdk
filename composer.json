@@ -1,6 +1,6 @@
 {
     "name": "phpdevkits/forge-sdk",
-    "description": "A modern PHP SDK for the Laravel Forge API, powered by Saloon.",
+    "description": "PHP SDK for Laravel Forge — a modern, type-safe client for the Forge API, built on Saloon.",
     "keywords": ["php", "sdk", "laravel", "forge", "laravel-forge", "saloon", "api-client"],
     "license": "MIT",
     "authors": [
