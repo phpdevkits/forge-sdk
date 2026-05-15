@@ -18,6 +18,8 @@ use PhpDevKits\ForgeSdk\Exceptions\ServerException;
 use PhpDevKits\ForgeSdk\Exceptions\UnauthorizedException;
 use PhpDevKits\ForgeSdk\Exceptions\ValidationException;
 use PhpDevKits\ForgeSdk\Requests\Me\GetMe;
+use PhpDevKits\ForgeSdk\Resources\OrganizationResource;
+use PhpDevKits\ForgeSdk\Resources\OrganizationsResource;
 use RuntimeException;
 use Saloon\Exceptions\Request\FatalRequestException;
 use Saloon\Http\Auth\TokenAuthenticator;
@@ -32,10 +34,7 @@ final class Forge extends Connector
 {
     use AlwaysThrowOnErrors;
 
-    public function __construct(
-        private readonly string $token,
-        public readonly ?string $organization = null,
-    ) {}
+    public function __construct(private readonly string $token, public readonly ?string $defaultOrganization = null) {}
 
     public static function fromConfig(?string $path = null): self
     {
@@ -145,6 +144,16 @@ final class Forge extends Connector
         }
 
         return User::from($data);
+    }
+
+    public function organizations(): OrganizationsResource
+    {
+        return new OrganizationsResource($this);
+    }
+
+    public function organization(string $slug): OrganizationResource
+    {
+        return new OrganizationResource($this, $slug);
     }
 
     #[Override]

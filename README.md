@@ -58,6 +58,32 @@ echo $user->email;  // "ada@example.com"
 echo $user->id;     // "216174"
 ```
 
+### List organizations
+
+```php
+foreach ($forge->organizations()->iterate() as $organization) {
+    echo $organization->slug.PHP_EOL;
+}
+
+// Or grab a single page:
+$page = $forge->organizations()->all(new ListOrganizationsOptions(size: 10));
+foreach ($page as $organization) {
+    // ...
+}
+if ($page->hasMore()) {
+    $next = $forge->organizations()->all(new ListOrganizationsOptions(cursor: $page->nextCursor));
+}
+```
+
+### Get one organization
+
+```php
+$organization = $forge->organization('acme')->get();
+
+echo $organization->name;
+echo $organization->slug;
+```
+
 ### Testing your own code
 
 The SDK is built on Saloon, so you can fake the Forge API in your own test suite without hitting the network:
