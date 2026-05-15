@@ -32,10 +32,10 @@ final readonly class Server implements JsonSerializable
         public ?string $redisStatus,
         public ?string $ipAddress,
         public ?string $privateIpAddress,
-        public bool $revoked,
+        public ?bool $revoked,
         public DateTimeImmutable $createdAt,
         public DateTimeImmutable $updatedAt,
-        public string $connectionStatus,
+        public ?string $connectionStatus,
         public string $timezone,
         public ?string $localPublicKey,
         public bool $isReady,
@@ -76,10 +76,10 @@ final readonly class Server implements JsonSerializable
             redisStatus: self::optionalString($attributes, 'redis_status'),
             ipAddress: self::optionalString($attributes, 'ip_address'),
             privateIpAddress: self::optionalString($attributes, 'private_ip_address'),
-            revoked: self::requireBool($attributes, 'revoked'),
+            revoked: self::optionalBool($attributes, 'revoked'),
             createdAt: self::requireDate($attributes, 'created_at'),
             updatedAt: self::requireDate($attributes, 'updated_at'),
-            connectionStatus: self::requireString($attributes, 'connection_status'),
+            connectionStatus: self::optionalString($attributes, 'connection_status'),
             timezone: self::requireString($attributes, 'timezone'),
             localPublicKey: self::optionalString($attributes, 'local_public_key'),
             isReady: self::requireBool($attributes, 'is_ready'),
@@ -162,6 +162,23 @@ final readonly class Server implements JsonSerializable
     /**
      * @param  array<array-key, mixed>  $attributes
      */
+    private static function optionalBool(array $attributes, string $key): ?bool
+    {
+        $value = $attributes[$key] ?? null;
+        if ($value === null) {
+            return null;
+        }
+
+        if (! is_bool($value)) {
+            throw new InvalidArgumentException(sprintf('Server `attributes.%s` must be a boolean or null.', $key));
+        }
+
+        return $value;
+    }
+
+    /**
+     * @param  array<array-key, mixed>  $attributes
+     */
     private static function requireDate(array $attributes, string $key): DateTimeImmutable
     {
         $value = $attributes[$key] ?? null;
@@ -197,10 +214,10 @@ final readonly class Server implements JsonSerializable
      *     redis_status: ?string,
      *     ip_address: ?string,
      *     private_ip_address: ?string,
-     *     revoked: bool,
+     *     revoked: ?bool,
      *     created_at: string,
      *     updated_at: string,
-     *     connection_status: string,
+     *     connection_status: ?string,
      *     timezone: string,
      *     local_public_key: ?string,
      *     is_ready: bool,

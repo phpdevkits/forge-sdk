@@ -37,6 +37,7 @@ final class ServerFixture extends ForgeFixture
             'identifier' => 'test-server-identifier',
             'credential_id' => 1,
             'local_public_key' => 'REDACTED',
+            'sudo_password' => 'REDACTED',
             'next_cursor' => $stableCursor,
             'prev_cursor' => $stableCursor,
         ];

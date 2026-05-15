@@ -1,0 +1,27 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Date": "REDACTED",
+        "Content-Type": "application\/vnd.api+json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Server": "REDACTED",
+        "Cache-Control": "no-cache, private",
+        "access-control-allow-origin": "*",
+        "x-ratelimit-limit": "REDACTED",
+        "x-ratelimit-remaining": "REDACTED",
+        "x-frame-options": [
+            "SAMEORIGIN",
+            "SAMEORIGIN"
+        ],
+        "x-xss-protection": "1; mode=block",
+        "x-content-type-options": "nosniff",
+        "cf-cache-status": "REDACTED",
+        "set-cookie": "REDACTED",
+        "Strict-Transport-Security": "max-age=31536000; preload",
+        "CF-RAY": "REDACTED",
+        "alt-svc": "REDACTED"
+    },
+    "data": "{\"data\":{\"id\":\"1\",\"type\":\"servers\",\"attributes\":{\"id\":\"1\",\"credential_id\":1,\"name\":\"Test User\",\"slug\":\"test-org-1\",\"type\":\"app\",\"ubuntu_version\":\"24.04\",\"ssh_port\":22,\"provider\":\"hetzner\",\"identifier\":\"test-server-identifier\",\"size\":\"3701\",\"region\":\"Nuremberg\",\"php_version\":\"php84\",\"php_cli_version\":\"php84\",\"opcache_status\":null,\"database_type\":\"\",\"db_status\":null,\"redis_status\":null,\"ip_address\":\"203.0.113.1\",\"private_ip_address\":\"10.0.0.1\",\"revoked\":false,\"created_at\":\"2024-01-01T00:00:00.000000Z\",\"updated_at\":\"2024-01-01T00:00:00.000000Z\",\"connection_status\":null,\"timezone\":\"UTC\",\"local_public_key\":\"REDACTED\",\"is_ready\":false},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/orgs\\\/test-org-1\/servers\/1\"}}}}",
+    "context": []
+}

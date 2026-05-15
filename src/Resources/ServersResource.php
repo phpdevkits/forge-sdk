@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace PhpDevKits\ForgeSdk\Resources;
 
 use Generator;
+use PhpDevKits\ForgeSdk\Data\CreateServerData;
 use PhpDevKits\ForgeSdk\Data\ListServersOptions;
 use PhpDevKits\ForgeSdk\Data\Page;
 use PhpDevKits\ForgeSdk\Data\Server;
+use PhpDevKits\ForgeSdk\Requests\Servers\CreateServer;
 use PhpDevKits\ForgeSdk\Requests\Servers\GetServers;
 use PhpDevKits\ForgeSdk\Resources\Concerns\ParsesPage;
 use Saloon\Http\BaseResource;
@@ -36,6 +38,21 @@ final class ServersResource extends BaseResource
             $this->connector->send(new GetServers($this->organization, $options)),
             Server::from(...),
         );
+    }
+
+    /**
+     * Create a new server. Returns the hydrated Server DTO from the response.
+     *
+     * @throws Throwable
+     */
+    public function create(CreateServerData $data): Server
+    {
+        $response = $this->connector->send(new CreateServer($this->organization, $data));
+
+        /** @var array<array-key, mixed> $body */
+        $body = $response->json('data');
+
+        return Server::from($body);
     }
 
     /**
