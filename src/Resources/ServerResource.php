@@ -59,6 +59,16 @@ final class ServerResource extends BaseResource
         $this->connector->send(new DeleteServer($this->organization, $this->id));
     }
 
+    public function sshKeys(): SshKeysResource
+    {
+        return new SshKeysResource($this->connector, $this->organization, $this->id);
+    }
+
+    public function sshKey(int|string $keyId): SshKeyResource
+    {
+        return new SshKeyResource($this->connector, $this->organization, $this->id, $keyId);
+    }
+
     /**
      * @throws Throwable
      */
