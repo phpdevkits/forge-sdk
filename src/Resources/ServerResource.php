@@ -119,6 +119,16 @@ final class ServerResource extends BaseResource
         return new ScheduledJobResource($this->connector, $this->organization, $this->id, $jobId);
     }
 
+    public function monitors(): MonitorsResource
+    {
+        return new MonitorsResource($this->connector, $this->organization, $this->id);
+    }
+
+    public function monitor(int|string $monitorId): MonitorResource
+    {
+        return new MonitorResource($this->connector, $this->organization, $this->id, $monitorId);
+    }
+
     /**
      * @throws Throwable
      */
