@@ -79,6 +79,16 @@ final class ServerResource extends BaseResource
         return new SiteResource($this->connector, $this->organization, $this->id, $siteId);
     }
 
+    public function daemons(): DaemonsResource
+    {
+        return new DaemonsResource($this->connector, $this->organization, $this->id);
+    }
+
+    public function daemon(int|string $daemonId): DaemonResource
+    {
+        return new DaemonResource($this->connector, $this->organization, $this->id, $daemonId);
+    }
+
     /**
      * @throws Throwable
      */
