@@ -69,6 +69,16 @@ final class ServerResource extends BaseResource
         return new SshKeyResource($this->connector, $this->organization, $this->id, $keyId);
     }
 
+    public function sites(): SitesResource
+    {
+        return new SitesResource($this->connector, $this->organization, $this->id);
+    }
+
+    public function site(int|string $siteId): SiteResource
+    {
+        return new SiteResource($this->connector, $this->organization, $this->id, $siteId);
+    }
+
     /**
      * @throws Throwable
      */
