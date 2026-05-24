@@ -109,6 +109,16 @@ final class ServerResource extends BaseResource
         return new FirewallRuleResource($this->connector, $this->organization, $this->id, $ruleId);
     }
 
+    public function scheduledJobs(): ScheduledJobsResource
+    {
+        return new ScheduledJobsResource($this->connector, $this->organization, $this->id);
+    }
+
+    public function scheduledJob(int|string $jobId): ScheduledJobResource
+    {
+        return new ScheduledJobResource($this->connector, $this->organization, $this->id, $jobId);
+    }
+
     /**
      * @throws Throwable
      */

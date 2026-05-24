@@ -1,0 +1,23 @@
+{
+    "statusCode": 202,
+    "headers": {
+        "Date": "REDACTED",
+        "Content-Type": "application\/vnd.api+json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Server": "REDACTED",
+        "Cache-Control": "no-cache, private",
+        "access-control-allow-origin": "*",
+        "x-ratelimit-limit": "REDACTED",
+        "x-ratelimit-remaining": "REDACTED",
+        "x-frame-options": "SAMEORIGIN",
+        "cf-cache-status": "REDACTED",
+        "set-cookie": "REDACTED",
+        "Strict-Transport-Security": "max-age=31536000; preload",
+        "X-Content-Type-Options": "nosniff",
+        "CF-RAY": "REDACTED",
+        "alt-svc": "REDACTED"
+    },
+    "data": "{\"data\":{\"id\":\"1\",\"type\":\"scheduledJobs\",\"attributes\":{\"name\":\"Test User\",\"command\":\"echo sdk-test\",\"status\":\"installing\",\"user\":\"forge\",\"frequency\":\"Nightly\",\"cron\":\"0 0 * * *\",\"next_run_time\":\"2026-05-25T00:00:00+00:00\",\"created_at\":\"2024-01-01T00:00:00.000000Z\",\"updated_at\":\"2024-01-01T00:00:00.000000Z\"},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/orgs\\\/test-org-1\\\/servers\\\/1\\\/scheduled-jobs\\\/1\"}}}}",
+    "context": []
+}
