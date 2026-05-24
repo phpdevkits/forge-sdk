@@ -23,6 +23,8 @@ use PhpDevKits\ForgeSdk\Resources\OrganizationResource;
 use PhpDevKits\ForgeSdk\Resources\OrganizationsResource;
 use PhpDevKits\ForgeSdk\Resources\ProviderResource;
 use PhpDevKits\ForgeSdk\Resources\ProvidersResource;
+use PhpDevKits\ForgeSdk\Resources\ServerCredentialResource;
+use PhpDevKits\ForgeSdk\Resources\ServerCredentialsResource;
 use PhpDevKits\ForgeSdk\Resources\ServerResource;
 use PhpDevKits\ForgeSdk\Resources\ServersResource;
 use RuntimeException;
@@ -169,6 +171,16 @@ final class Forge extends Connector
     public function provider(int|string $id): ProviderResource
     {
         return new ProviderResource($this, $id);
+    }
+
+    public function serverCredentials(): ServerCredentialsResource
+    {
+        return new ServerCredentialsResource($this, $this->requireOrganization('serverCredentials'));
+    }
+
+    public function serverCredential(int|string $id): ServerCredentialResource
+    {
+        return new ServerCredentialResource($this, $this->requireOrganization('serverCredential'), $id);
     }
 
     /**
