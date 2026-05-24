@@ -1,3 +1,11 @@
+<!--
+    Logo/banner: drop the image at art/logo.png, then replace the <h1>
+    block below with:
+
+    <p align="center">
+        <img src="art/logo.png" alt="Forge SDK" width="320">
+    </p>
+-->
 <p align="center">
     <h1 align="center">Forge SDK</h1>
 </p>
