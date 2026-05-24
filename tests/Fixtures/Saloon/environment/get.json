@@ -1,0 +1,27 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Date": "REDACTED",
+        "Content-Type": "application\/vnd.api+json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Server": "REDACTED",
+        "Cache-Control": "no-cache, private",
+        "access-control-allow-origin": "*",
+        "x-ratelimit-limit": "REDACTED",
+        "x-ratelimit-remaining": "REDACTED",
+        "x-frame-options": [
+            "SAMEORIGIN",
+            "SAMEORIGIN"
+        ],
+        "x-xss-protection": "1; mode=block",
+        "x-content-type-options": "nosniff",
+        "cf-cache-status": "REDACTED",
+        "set-cookie": "REDACTED",
+        "Strict-Transport-Security": "max-age=31536000; preload",
+        "CF-RAY": "REDACTED",
+        "alt-svc": "REDACTED"
+    },
+    "data": "{\"data\":{\"id\":\"1\",\"type\":\"environments\",\"attributes\":{\"content\":\"APP_NAME=Laravel\\nAPP_ENV=production\\nAPP_KEY=base64:REDACTED\\nAPP_DEBUG=false\\nDB_CONNECTION=mysql\\nDB_PASSWORD=REDACTED\\n\"},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/orgs\\\/test-org-1\\\/servers\\\/1\\\/sites\\\/1\\\/environment\"}}}}",
+    "context": []
+}
