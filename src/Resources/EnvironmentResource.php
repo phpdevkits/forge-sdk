@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PhpDevKits\ForgeSdk\Resources;
 
-use InvalidArgumentException;
 use PhpDevKits\ForgeSdk\Data\UpdateEnvironmentData;
 use PhpDevKits\ForgeSdk\Requests\Servers\GetEnvironment;
 use PhpDevKits\ForgeSdk\Requests\Servers\UpdateEnvironment;
@@ -34,11 +33,7 @@ final class EnvironmentResource extends BaseResource
 
         $content = $response->json('data.attributes.content');
 
-        if (! is_string($content)) {
-            throw new InvalidArgumentException('Environment `data.attributes.content` must be a string.');
-        }
-
-        return $content;
+        return is_string($content) ? $content : '';
     }
 
     /**
