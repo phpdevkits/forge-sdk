@@ -12,6 +12,97 @@ were recorded, even if Forge later corrects the spec.
 
 ---
 
+## 2026-05-24 — Recorded fixtures leak resource ids / hostnames through URL paths
+
+**Not a spec issue — a test-hygiene one.** The `ForgeFixture` leaf-key
+redaction scrubbed `id` / `name` / `slug`, but real numeric resource ids
+and on-forge hostnames survived inside `links.self.href`, `meta.path`,
+and `web_directory` because the regex pass only covered `/orgs/<slug>`
+(plus `/servers/<id>` in `ServerFixture`).
+
+**Fix:** `ForgeFixture::defineSensitiveRegexPatterns()` now collapses every
+nested resource-id segment (`servers|sites|background-processes|
+deployments|ssh-keys|keys|providers|regions|sizes|credentials`) to `/1`
+and rewrites `*.on-forge.com` → `example-site.on-forge.com`. No
+credentials ever leaked (tokens/keys/passwords/cookies were always clean).
+When adding a new nested resource, confirm its URL segment is in that
+alternation.
+
+---
+
+## 2026-05-24 — Daemon update 500s unless `config` is sent
+
+**Spec:** `UpdateBackgroundProcessRequest` requires `name`; `config` (raw
+supervisor config) is optional.
+
+**Runtime:** `PUT .../background-processes/{id}` with name-only returns
+`500 Server Error`. With `name` + `config` → `202`. `config` is
+effectively required.
+
+**SDK impact:** `Data\UpdateDaemonData` keeps `config` nullable (faithful to
+spec) but `DaemonResource::update()` documents that omitting it 500s.
+Always set it.
+
+---
+
+## 2026-05-24 — Fresh daemons sit in `installing` → `installed` (never `running`); restart 500s while installing
+
+**Runtime:** A just-created daemon reports `status: installing`, then
+settles to `installed` (not `running`). `POST .../actions` (restart/etc.)
+returns 500 until the daemon is `installed`.
+
+**SDK impact:** the daemon lifecycle test waits on a live un-mocked
+connector until `status !== 'installing'` before acting; skipped on
+replay. `BackgroundProcessResource` attributes are also sparse —
+command/user/directory/processes/status/created_at only (no `name` or
+`updated_at`).
+
+---
+
+## 2026-05-24 — Deployment trigger / script live behind a real repo
+
+**Runtime:** `POST .../deployments` (trigger) returns `202` with the new
+deployment in the body. Deploying a `php`-type site whose repo is actually
+Laravel fails (`vendor/autoload.php` missing) because the default deploy
+script runs `artisan` before `composer install` — fixable via
+`deploymentScript()->update()` (composer install first), which the
+Deployments slice dogfooded. The `.on-forge.com` edge then 525s until an
+SSL cert is issued (see issue #25).
+
+**SDK impact:** `Data\Deployment.started_at` / `ended_at` are nullable
+(queued deployments have neither, despite the spec marking them required).
+
+---
+
+## 2026-05-20 — Sites: four spec-vs-runtime divergences
+
+1. **Individual-site GET is server-less.** `GET /orgs/{org}/sites/{site}`
+   — the `/servers/{server}/sites/{site}` path only supports PUT/DELETE
+   (GET there → 405). `GetSite` uses the server-less path; update/delete
+   keep the server segment.
+2. **`domain_mode` is runtime-required** on create (spec marks it
+   optional), and on-forge sites need a single dotless subdomain `name`.
+3. **Fresh sites return `aliases`, `deployment_status`, and
+   `maintenance_mode.enabled` as null** despite required-non-null in spec
+   — `Data\Site` / `Data\SiteMaintenanceMode` loosened accordingly.
+4. **PUT update returns 202 with an empty body** → `SiteResource::update()`
+   is `void`. A freshly-created site also briefly 405s on its
+   individual routes while provisioning.
+
+---
+
+## 2026-05-19 — `POST .../ssh-keys` returns 202 with an empty body
+
+**Spec:** documented as returning a `KeyResource`.
+
+**Runtime:** `202 Accepted`, empty body, `text/html` content type — the
+key installs asynchronously and no resource comes back.
+
+**SDK impact:** `SshKeysResource::create()` is typed `void`; callers list
+afterwards to recover the new key.
+
+---
+
 ## 2026-05-15 — `hetzner.size_id` only accepts the size code, not the Forge id
 
 **Spec:** `CreateServerRequest.hetzner.size_id` is `"type": "string"` with
