@@ -1,0 +1,27 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Date": "REDACTED",
+        "Content-Type": "application\/vnd.api+json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Server": "REDACTED",
+        "Cache-Control": "no-cache, private",
+        "access-control-allow-origin": "*",
+        "x-ratelimit-limit": "REDACTED",
+        "x-ratelimit-remaining": "REDACTED",
+        "x-frame-options": [
+            "SAMEORIGIN",
+            "SAMEORIGIN"
+        ],
+        "x-xss-protection": "1; mode=block",
+        "x-content-type-options": "nosniff",
+        "cf-cache-status": "REDACTED",
+        "set-cookie": "REDACTED",
+        "Strict-Transport-Security": "max-age=31536000; preload",
+        "CF-RAY": "REDACTED",
+        "alt-svc": "REDACTED"
+    },
+    "data": "{\"data\":{\"id\":\"1\",\"type\":\"deploymentScripts\",\"attributes\":{\"content\":\"cd \\\/home\\\/forge\\\/example.com\\ngit pull origin main\",\"auto_source\":false},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/orgs\\\/test-org-1\\\/servers\\\/1205617\\\/sites\\\/3210369\\\/deployments\\\/script\"}}}}",
+    "context": []
+}
