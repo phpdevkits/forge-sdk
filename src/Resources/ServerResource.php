@@ -99,6 +99,16 @@ final class ServerResource extends BaseResource
         return new DatabaseResource($this->connector, $this->organization, $this->id, $databaseId);
     }
 
+    public function firewallRules(): FirewallRulesResource
+    {
+        return new FirewallRulesResource($this->connector, $this->organization, $this->id);
+    }
+
+    public function firewallRule(int|string $ruleId): FirewallRuleResource
+    {
+        return new FirewallRuleResource($this->connector, $this->organization, $this->id, $ruleId);
+    }
+
     /**
      * @throws Throwable
      */

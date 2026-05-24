@@ -1,0 +1,27 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Date": "REDACTED",
+        "Content-Type": "application\/vnd.api+json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Server": "REDACTED",
+        "Cache-Control": "no-cache, private",
+        "access-control-allow-origin": "*",
+        "x-ratelimit-limit": "REDACTED",
+        "x-ratelimit-remaining": "REDACTED",
+        "x-frame-options": [
+            "SAMEORIGIN",
+            "SAMEORIGIN"
+        ],
+        "x-xss-protection": "1; mode=block",
+        "x-content-type-options": "nosniff",
+        "cf-cache-status": "REDACTED",
+        "set-cookie": "REDACTED",
+        "Strict-Transport-Security": "max-age=31536000; preload",
+        "CF-RAY": "REDACTED",
+        "alt-svc": "REDACTED"
+    },
+    "data": "{\"data\":[{\"id\":\"1\",\"type\":\"rules\",\"attributes\":{\"name\":\"Test User\",\"port\":\"22\",\"type\":\"allow\",\"ip_address\":\"203.0.113.10\",\"status\":\"installed\",\"created_at\":\"2024-01-01T00:00:00.000000Z\",\"updated_at\":\"2024-01-01T00:00:00.000000Z\"},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/orgs\\\/test-org-1\\\/servers\\\/1\\\/firewall-rules\\\/1\"}}},{\"id\":\"1\",\"type\":\"rules\",\"attributes\":{\"name\":\"Test User\",\"port\":\"80\",\"type\":\"allow\",\"ip_address\":\"203.0.113.10\",\"status\":\"installed\",\"created_at\":\"2024-01-01T00:00:00.000000Z\",\"updated_at\":\"2024-01-01T00:00:00.000000Z\"},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/orgs\\\/test-org-1\\\/servers\\\/1\\\/firewall-rules\\\/1\"}}},{\"id\":\"1\",\"type\":\"rules\",\"attributes\":{\"name\":\"Test User\",\"port\":\"443\",\"type\":\"allow\",\"ip_address\":\"203.0.113.10\",\"status\":\"installed\",\"created_at\":\"2024-01-01T00:00:00.000000Z\",\"updated_at\":\"2024-01-01T00:00:00.000000Z\"},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/orgs\\\/test-org-1\\\/servers\\\/1\\\/firewall-rules\\\/1\"}}},{\"id\":\"1\",\"type\":\"rules\",\"attributes\":{\"name\":\"Test User\",\"port\":\"38080\",\"type\":\"allow\",\"ip_address\":\"203.0.113.10\",\"status\":\"installing\",\"created_at\":\"2024-01-01T00:00:00.000000Z\",\"updated_at\":\"2024-01-01T00:00:00.000000Z\"},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/orgs\\\/test-org-1\\\/servers\\\/1\\\/firewall-rules\\\/1\"}}}],\"links\":[],\"meta\":{\"path\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/orgs\\\/test-org-1\\\/servers\\\/1\\\/firewall-rules\",\"per_page\":30,\"next_cursor\":null,\"prev_cursor\":null}}",
+    "context": []
+}
