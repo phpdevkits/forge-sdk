@@ -87,6 +87,7 @@ test('lifecycle: create -> list/find -> iterate -> get -> delete',
                     $rule = $candidate;
                 }
             }
+
             expect($rule)->toBeInstanceOf(RedirectRule::class);
 
             /** @var RedirectRule $rule */
