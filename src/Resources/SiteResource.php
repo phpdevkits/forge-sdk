@@ -92,4 +92,14 @@ final class SiteResource extends BaseResource
     {
         return new NginxConfigResource($this->connector, $this->organization, $this->serverId, $this->siteId);
     }
+
+    public function redirectRules(): RedirectRulesResource
+    {
+        return new RedirectRulesResource($this->connector, $this->organization, $this->serverId, $this->siteId);
+    }
+
+    public function redirectRule(int|string $ruleId): RedirectRuleResource
+    {
+        return new RedirectRuleResource($this->connector, $this->organization, $this->serverId, $this->siteId, $ruleId);
+    }
 }
