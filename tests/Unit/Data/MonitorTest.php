@@ -139,6 +139,16 @@ test('::from() throws when state_changed_at is malformed',
         ]]);
     })->throws(InvalidArgumentException::class, '`attributes.state_changed_at` is not a valid date-time');
 
+test('::from() throws when state_changed_at is a non-string, non-null value',
+    function (): void {
+        Monitor::from(['id' => '1', 'attributes' => [
+            'type' => 'cpu_load', 'operator' => 'gte', 'threshold' => 90,
+            'notify' => 'a@b.c', 'status' => 'installed', 'state' => 'OK',
+            'state_changed_at' => 12345,
+            'created_at' => '2026-01-01T00:00:00Z', 'updated_at' => '2026-01-01T00:00:00Z',
+        ]]);
+    })->throws(InvalidArgumentException::class, '`attributes.state_changed_at` must be a string');
+
 test('jsonSerialize() emits snake_case keys with ATOM-formatted dates',
     function (): void {
         $monitor = $this->factory->make([
