@@ -87,4 +87,9 @@ final class SiteResource extends BaseResource
     {
         return new EnvironmentResource($this->connector, $this->organization, $this->serverId, $this->siteId);
     }
+
+    public function nginxConfig(): NginxConfigResource
+    {
+        return new NginxConfigResource($this->connector, $this->organization, $this->serverId, $this->siteId);
+    }
 }

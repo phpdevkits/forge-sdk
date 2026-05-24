@@ -1,0 +1,27 @@
+{
+    "statusCode": 200,
+    "headers": {
+        "Date": "REDACTED",
+        "Content-Type": "application\/vnd.api+json",
+        "Transfer-Encoding": "chunked",
+        "Connection": "keep-alive",
+        "Server": "REDACTED",
+        "Cache-Control": "no-cache, private",
+        "access-control-allow-origin": "*",
+        "x-ratelimit-limit": "REDACTED",
+        "x-ratelimit-remaining": "REDACTED",
+        "x-frame-options": [
+            "SAMEORIGIN",
+            "SAMEORIGIN"
+        ],
+        "x-xss-protection": "1; mode=block",
+        "x-content-type-options": "nosniff",
+        "cf-cache-status": "REDACTED",
+        "set-cookie": "REDACTED",
+        "Strict-Transport-Security": "max-age=31536000; preload",
+        "CF-RAY": "REDACTED",
+        "alt-svc": "REDACTED"
+    },
+    "data": "{\"data\":{\"id\":\"1\",\"type\":\"nginxConfigs\",\"attributes\":{\"content\":\"server {\\n    listen 80;\\n    server_name example-site.on-forge.com;\\n    root \\\/home\\\/forge\\\/example-site\\\/public;\\n}\\n\"},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/orgs\\\/test-org-1\\\/servers\\\/1\\\/sites\\\/1\\\/nginx\"}}}}",
+    "context": []
+}
