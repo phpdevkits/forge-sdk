@@ -89,7 +89,7 @@ class ForgeFixture extends Fixture
             // Account-specific numeric resource ids in any nested URL segment
             // (`/servers/123`, `/sites/123`, `/background-processes/123`, ...)
             // collapse to `1`, matching the redacted `id` leaf.
-            '#\\\\?/(servers|sites|background-processes|deployments|ssh-keys|keys|providers|regions|sizes|credentials)\\\\?/\d+#' => static fn (string $match): string => (string) preg_replace('/\d+$/', '1', $match),
+            '#\\\\?/(servers|sites|background-processes|deployments|ssh-keys|keys|providers|regions|sizes|credentials|server-credentials|vpcs|schemas|users|backups|instances|restores|monitors|firewall-rules|scheduled-jobs|redirect-rules)\\\\?/\d+#' => static fn (string $match): string => (string) preg_replace('/\d+$/', '1', $match),
             // Site hostnames (`<name>.on-forge.com`, incl. inside `/home/forge/...`
             // directory paths) → a neutral placeholder.
             '#[a-z0-9][a-z0-9.-]*\.on-forge\.com#i' => 'example-site.on-forge.com',

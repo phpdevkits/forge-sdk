@@ -89,6 +89,16 @@ final class ServerResource extends BaseResource
         return new DaemonResource($this->connector, $this->organization, $this->id, $daemonId);
     }
 
+    public function databases(): DatabasesResource
+    {
+        return new DatabasesResource($this->connector, $this->organization, $this->id);
+    }
+
+    public function database(int|string $databaseId): DatabaseResource
+    {
+        return new DatabaseResource($this->connector, $this->organization, $this->id, $databaseId);
+    }
+
     /**
      * @throws Throwable
      */
