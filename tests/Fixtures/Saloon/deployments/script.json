@@ -22,6 +22,6 @@
         "CF-RAY": "REDACTED",
         "alt-svc": "REDACTED"
     },
-    "data": "{\"data\":{\"id\":\"1\",\"type\":\"deploymentScripts\",\"attributes\":{\"content\":\"cd \\\/home\\\/forge\\\/example.com\\ngit pull origin main\",\"auto_source\":false},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/orgs\\\/test-org-1\\\/servers\\\/1205617\\\/sites\\\/3210369\\\/deployments\\\/script\"}}}}",
+    "data": "{\"data\":{\"id\":\"1\",\"type\":\"deploymentScripts\",\"attributes\":{\"content\":\"cd \\\/home\\\/forge\\\/example.com\\ngit pull origin main\",\"auto_source\":false},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/orgs\\\/test-org-1\\\/servers\\\/1\\\/sites\\\/1\\\/deployments\\\/script\"}}}}",
     "context": []
 }

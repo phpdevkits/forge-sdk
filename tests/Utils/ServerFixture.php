@@ -42,20 +42,4 @@ final class ServerFixture extends ForgeFixture
             'prev_cursor' => $stableCursor,
         ];
     }
-
-    /**
-     * Adds a regex pass that anonymizes the numeric server id leaking through
-     * `links.self.href` (e.g. `/api/orgs/<slug>/servers/843752` → `.../servers/1`).
-     *
-     * @return array<string, string|callable>
-     */
-    #[Override]
-    protected function defineSensitiveRegexPatterns(): array
-    {
-        return [
-            ...parent::defineSensitiveRegexPatterns(),
-            // Matches `/servers/<numeric-id>` with raw `/` or JSON-escaped `\/`.
-            '#\\\\?/servers\\\\?/\d+#' => '/servers/1',
-        ];
-    }
 }

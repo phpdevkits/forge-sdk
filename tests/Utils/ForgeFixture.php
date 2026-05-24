@@ -63,11 +63,14 @@ class ForgeFixture extends Fixture
     }
 
     /**
-     * Regex pass for slugs embedded in URL paths (e.g.
-     * `https://forge.laravel.com/api/orgs/<slug>`). The JSON-key pass above
-     * has already replaced bare `slug` fields with placeholders; this pass
-     * brings URL paths into line so a reader of the fixture can't read off
-     * the real slug from `links.self.href`.
+     * Regex pass for identifiers embedded in URL paths (`links.self.href`,
+     * `meta.path`) and host names — the JSON-key pass only scrubs bare leaf
+     * fields, so without this a reader could recover the real org slug, the
+     * account's numeric resource ids, or a site's on-forge hostname straight
+     * from a URL string.
+     *
+     * Patterns match whether slashes are raw (`/`) or JSON-escaped (`\/`),
+     * since `json_encode` escapes forward slashes in the stored body.
      *
      * @return array<string, string|callable>
      */
@@ -76,17 +79,20 @@ class ForgeFixture extends Fixture
     {
         $mapper = $this->sequentialPlaceholder('test-org-');
 
-        // Matches `/orgs/<slug>` whether the slashes are raw (`/`) or
-        // JSON-escaped (`\/`), since json_encode escapes forward slashes by
-        // default in the body string at this stage.
         return [
+            // `/orgs/<slug>` → sequential `test-org-N` placeholder.
             '#\\\\?/orgs\\\\?/[a-z0-9_-]+#i' => static function (string $match) use ($mapper): string {
                 $slashPos = strrpos($match, '/');
-                $slug = substr($match, $slashPos + 1);
-                $prefix = substr($match, 0, $slashPos + 1);
 
-                return $prefix.$mapper($slug);
+                return substr($match, 0, $slashPos + 1).$mapper(substr($match, $slashPos + 1));
             },
+            // Account-specific numeric resource ids in any nested URL segment
+            // (`/servers/123`, `/sites/123`, `/background-processes/123`, ...)
+            // collapse to `1`, matching the redacted `id` leaf.
+            '#\\\\?/(servers|sites|background-processes|deployments|ssh-keys|keys|providers|regions|sizes|credentials)\\\\?/\d+#' => static fn (string $match): string => (string) preg_replace('/\d+$/', '1', $match),
+            // Site hostnames (`<name>.on-forge.com`, incl. inside `/home/forge/...`
+            // directory paths) → a neutral placeholder.
+            '#[a-z0-9][a-z0-9.-]*\.on-forge\.com#i' => 'example-site.on-forge.com',
         ];
     }
 

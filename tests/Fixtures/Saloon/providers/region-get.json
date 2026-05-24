@@ -22,6 +22,6 @@
         "CF-RAY": "REDACTED",
         "alt-svc": "REDACTED"
     },
-    "data": "{\"data\":{\"id\":\"1\",\"type\":\"providerRegions\",\"attributes\":{\"name\":\"Test User\",\"code\":\"ams3\",\"alternate_code\":null},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/providers\\\/1\\\/regions\\\/2\"}}}}",
+    "data": "{\"data\":{\"id\":\"1\",\"type\":\"providerRegions\",\"attributes\":{\"name\":\"Test User\",\"code\":\"ams3\",\"alternate_code\":null},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/providers\\\/1\\\/regions\\\/1\"}}}}",
     "context": []
 }

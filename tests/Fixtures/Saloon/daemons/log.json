@@ -22,6 +22,6 @@
         "CF-RAY": "REDACTED",
         "alt-svc": "REDACTED"
     },
-    "data": "{\"data\":{\"id\":\"1\",\"type\":\"backgroundProcessLogs\",\"attributes\":{\"content\":\"REDACTED\"},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/orgs\\\/test-org-1\\\/servers\\\/1205617\\\/background-processes\\\/840500\\\/log\"}}}}",
+    "data": "{\"data\":{\"id\":\"1\",\"type\":\"backgroundProcessLogs\",\"attributes\":{\"content\":\"REDACTED\"},\"links\":{\"self\":{\"href\":\"https:\\\/\\\/forge.laravel.com\\\/api\\\/orgs\\\/test-org-1\\\/servers\\\/1\\\/background-processes\\\/1\\\/log\"}}}}",
     "context": []
 }
