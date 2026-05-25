@@ -102,4 +102,9 @@ final class SiteResource extends BaseResource
     {
         return new RedirectRuleResource($this->connector, $this->organization, $this->serverId, $this->siteId, $ruleId);
     }
+
+    public function logs(): SiteLogsResource
+    {
+        return new SiteLogsResource($this->connector, $this->organization, $this->serverId, $this->siteId);
+    }
 }
