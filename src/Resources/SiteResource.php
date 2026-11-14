@@ -102,4 +102,14 @@ final class SiteResource extends BaseResource
     {
         return new RedirectRuleResource($this->connector, $this->organization, $this->serverId, $this->siteId, $ruleId);
     }
+
+    public function scheduledJobs(): SiteScheduledJobsResource
+    {
+        return new SiteScheduledJobsResource($this->connector, $this->organization, $this->serverId, $this->siteId);
+    }
+
+    public function scheduledJob(int|string $jobId): SiteScheduledJobResource
+    {
+        return new SiteScheduledJobResource($this->connector, $this->organization, $this->serverId, $this->siteId, $jobId);
+    }
 }
